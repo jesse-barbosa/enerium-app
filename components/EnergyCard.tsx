@@ -1,5 +1,4 @@
-import { StyleSheet, Text } from 'react-native';
-import { Card } from 'react-native-paper';
+import { View, Text } from 'react-native';
 
 type Props = {
   title: string;
@@ -8,17 +7,9 @@ type Props = {
 
 export default function EnergyCard({ title, value }: Props) {
   return (
-    <Card style={styles.card}>
-      <Card.Content>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.value}>{value}</Text>
-      </Card.Content>
-    </Card>
+    <View className="bg-white border border-neutral-200 shadow-md rounded-lg p-6 mb-4">
+        <Text className="text-md text-neutral-700">{title}</Text>
+        <Text className="text-lg font-bold text-neutral-900">{value}</Text>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  card: { marginBottom: 12 },
-  title: { fontSize: 16, color: '#555' },
-  value: { fontSize: 20, fontWeight: 'bold', color: '#222' },
-});
