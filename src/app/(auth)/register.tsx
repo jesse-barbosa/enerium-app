@@ -11,17 +11,21 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-    const handleSignUp = async () => {
+  const handleSignUp = async () => {
     try {
-        await signUp(email, password);
-        router.replace('/');
+      if (!name) {
+        alert('Informe seu nome');
+        return;
+      }
+
+      await signUp(email, password, name);
+      router.replace('/');
     } catch (error) {
-        // handle error
-        if (error instanceof Error) {
+      if (error instanceof Error) {
         alert("Erro: " + error.message);
-        }
+      }
     }
-    };
+  };
 
   return (
     <View style={styles.container}>
