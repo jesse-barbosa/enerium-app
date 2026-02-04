@@ -1,8 +1,9 @@
-import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { supabase } from '../../lib/supabase';
 import { colors } from '../../theme/colors';
+
+import { AppHeader } from '../../components/layout/AppHeader';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -39,41 +40,37 @@ export default function Dashboard() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Enerium ⚡</Text>
-      <Text style={styles.subtitle}>Resumo energético</Text>
 
-      {/* Cards principais */}
-      <View style={styles.cardsRow}>
-        <View style={styles.card}>
-          <Text style={styles.cardLabel}>Consumo mensal</Text>
-          <Text style={styles.cardValue}>{stats.totalKwh.toFixed(1)} kWh</Text>
+      <AppHeader 
+        title="Ambientes"
+      />
+
+      <View style={styles.summary}>
+        {/* Cards principais */}
+        <View style={styles.cardsRow}>
+          <View style={styles.card}>
+            <Text style={styles.cardLabel}>Consumo mensal</Text>
+            <Text style={styles.cardValue}>{stats.totalKwh.toFixed(1)} kWh</Text>
+          </View>
+
+          <View style={styles.card}>
+            <Text style={styles.cardLabel}>Custo estimado</Text>
+            <Text style={styles.cardValue}>R$ {stats.totalCost.toFixed(2)}</Text>
+          </View>
         </View>
 
-        <View style={styles.card}>
-          <Text style={styles.cardLabel}>Custo estimado</Text>
-          <Text style={styles.cardValue}>R$ {stats.totalCost.toFixed(2)}</Text>
+        <View style={styles.cardsRow}>
+          <View style={styles.cardSmall}>
+            <Text style={styles.cardLabel}>Ambientes</Text>
+            <Text style={styles.cardValue}>{stats.environments}</Text>
+          </View>
+
+          <View style={styles.cardSmall}>
+            <Text style={styles.cardLabel}>Equipamentos</Text>
+            <Text style={styles.cardValue}>{stats.equipments}</Text>
+          </View>
         </View>
       </View>
-
-      <View style={styles.cardsRow}>
-        <View style={styles.cardSmall}>
-          <Text style={styles.cardLabel}>Ambientes</Text>
-          <Text style={styles.cardValue}>{stats.environments}</Text>
-        </View>
-
-        <View style={styles.cardSmall}>
-          <Text style={styles.cardLabel}>Equipamentos</Text>
-          <Text style={styles.cardValue}>{stats.equipments}</Text>
-        </View>
-      </View>
-
-      {/* CTA */}
-      <TouchableOpacity
-        style={styles.cta}
-        onPress={() => router.push('/(tabs)/simulation')}
-      >
-        <Text style={styles.ctaText}>Simular consumo agora</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -81,18 +78,10 @@ export default function Dashboard() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
     backgroundColor: colors.background,
   },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: colors.secondary,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 24,
+  summary: {
+    padding: 24,
   },
   cardsRow: {
     flexDirection: 'row',
@@ -122,17 +111,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.secondary,
     marginTop: 6,
-  },
-  cta: {
-    marginTop: 32,
-    backgroundColor: colors.primary,
-    padding: 16,
-    borderRadius: 14,
-  },
-  ctaText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 16,
   },
 });
