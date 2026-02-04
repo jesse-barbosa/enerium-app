@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
 import { colors } from '../../theme/colors';
 
@@ -12,6 +13,10 @@ export default function Dashboard() {
     totalKwh: 0,
     totalCost: 0,
   });
+
+  const { user } = useAuth();
+
+  const userName = user?.user_metadata?.name;
 
   useEffect(() => {
     loadStats();
@@ -42,7 +47,7 @@ export default function Dashboard() {
     <View style={styles.container}>
 
       <AppHeader 
-        title="Ambientes"
+        title={`Olá, ${userName}!`}
       />
 
       <View style={styles.summary}>
