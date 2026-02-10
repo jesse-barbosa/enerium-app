@@ -47,7 +47,7 @@ export default function Dashboard() {
     <View style={styles.container}>
 
       <AppHeader 
-        title={`Olá, ${userName}!`}
+        title={`Olá, ${userName ? userName : 'usuário'}!`}
       />
 
       <View style={styles.summary}>
