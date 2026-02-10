@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { ActivityIndicator, View } from 'react-native';
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
-import { colors } from '../theme/colors';
 
 function RootNavigator() {
   const { user, loading } = useAuth();
@@ -9,7 +9,7 @@ function RootNavigator() {
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center' }}>
-        <ActivityIndicator size="large" color={colors.primary} />
+        <ActivityIndicator size="large" />
       </View>
     );
   }
@@ -31,6 +31,8 @@ function RootNavigator() {
 export default function Layout() {
   return (
     <AuthProvider>
+      {/* ÍCONES PRETOS SOBRE FUNDO BRANCO */}
+      <StatusBar style="dark" translucent />
       <RootNavigator />
     </AuthProvider>
   );
