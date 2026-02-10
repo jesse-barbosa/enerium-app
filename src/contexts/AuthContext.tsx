@@ -16,14 +16,33 @@ export const AuthProvider = ({ children }: any) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+
     supabase.auth.getSession().then(({ data }) => {
+      if (!isMounted) return;
       setUser(data.session?.user ?? null);
       setLoading(false);
     });
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
+    const { data: subscription } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        console.log('[AUTH EVENT]', event);
+
+        if (event === 'SIGNED_OUT') {
+          setUser(null);
+          return;
+        }
+
+        if (session?.user) {
+          setUser(session.user);
+        }
+      }
+    );
+
+    return () => {
+      isMounted = false;
+      subscription.subscription.unsubscribe();
+    };
   }, []);
 
   const signIn = async (email: string, password: string) => {
