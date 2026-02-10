@@ -17,7 +17,7 @@ export default function Profile() {
     await supabase.auth.signOut();
 
     // Redireciona para a tela de login
-    router.replace('../(auth)/login');
+    router.replace('/(auth)/login');
   };
 
   return (
@@ -43,7 +43,7 @@ export default function Profile() {
         {/* LogOut button */}
         <TouchableOpacity
           style={styles.logoutButton}
-          onPress={handleLogout}
+          onPress={() => handleLogout()}
         >
           <Text style={styles.logoutButtonText}>Sair</Text>
         </TouchableOpacity>
