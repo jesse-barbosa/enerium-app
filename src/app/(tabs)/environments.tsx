@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 
-import { Link, useRouter } from 'expo-router';
+import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 
@@ -11,47 +11,6 @@ import { supabase } from '../../lib/supabase';
 import { colors } from '../../theme/colors';
 
 export default function Environments() {
-  const router = useRouter();
-
-  const mockData = [
-    {
-      id: 1,
-      name: 'Ambiente 1',
-      type: 'Residencial',
-      area_m2: 100,
-    },
-    {
-      id: 2,
-      name: 'Ambiente 2',
-      type: 'Comercial',
-      area_m2: 200,
-    },
-    {
-      id: 3,
-      name: 'Ambiente 3',
-      type: 'Industrial',
-      area_m2: 300,
-    },
-    {
-      id: 4,
-      name: 'Ambiente 4',
-      type: 'Residencial',
-      area_m2: 100,
-    },
-    {
-      id: 5,
-      name: 'Ambiente 5',
-      type: 'Comercial',
-      area_m2: 200,
-    },
-    {
-      id: 6,
-      name: 'Ambiente 6',
-      type: 'Industrial',
-      area_m2: 300,
-    },
-  ]
-
   const [environments, setEnvironments] = useState<any[]>([]);
 
   useEffect(() => {
@@ -59,10 +18,6 @@ export default function Environments() {
   }, []);
 
   async function loadEnvironments() {
-
-    // mock
-    // setEnvironments(mockData);
-    // return;
 
     const { data } = await supabase
       .from('environments')
@@ -79,7 +34,6 @@ export default function Environments() {
       <AppHeader 
         title="Ambientes"
       />
-
 
       {/* LISTA */}
       <FlatList
