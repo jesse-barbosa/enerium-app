@@ -17,7 +17,7 @@ export function AppHeader ({ title }: Props) {
 
     {/* Botão para notificações */}
     <View>
-      <Ionicons name="notifications-outline" size={26} color={colors.primary} />
+      <Ionicons name="notifications-outline" size={30} color={colors.primary} />
     </View>
 
     </Animated.View>
