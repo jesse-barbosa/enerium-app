@@ -1,5 +1,5 @@
-import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
+import { AnimatedTabIcon } from '../../components/AnimatedTabIcon';
 import { colors } from '../../theme/colors';
 
 export default function TabsLayout() {
@@ -10,9 +10,15 @@ export default function TabsLayout() {
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: '#999',
         tabBarStyle: {
-          height: 60,
-          paddingBottom: 16,
-          paddingTop: 6,
+          height: 64,
+          paddingBottom: 12,
+          paddingTop: 8,
+          borderTopWidth: 0,
+          elevation: 10,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          marginTop: 2,
         },
       }}
     >
@@ -20,8 +26,12 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home-outline" size={size} color={color} />
+          tabBarIcon: (props) => (
+            <AnimatedTabIcon
+              {...props}
+              activeIcon="home"
+              inactiveIcon="home-outline"
+            />
           ),
         }}
       />
@@ -30,8 +40,12 @@ export default function TabsLayout() {
         name="environments"
         options={{
           title: 'Ambientes',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="business-outline" size={size} color={color} />
+          tabBarIcon: (props) => (
+            <AnimatedTabIcon
+              {...props}
+              activeIcon="business"
+              inactiveIcon="business-outline"
+            />
           ),
         }}
       />
@@ -40,8 +54,12 @@ export default function TabsLayout() {
         name="equipments"
         options={{
           title: 'Equipamentos',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="hardware-chip-outline" size={size} color={color} />
+          tabBarIcon: (props) => (
+            <AnimatedTabIcon
+              {...props}
+              activeIcon="hardware-chip"
+              inactiveIcon="hardware-chip-outline"
+            />
           ),
         }}
       />
@@ -50,8 +68,12 @@ export default function TabsLayout() {
         name="simulation"
         options={{
           title: 'Simular',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="flash-outline" size={size} color={color} />
+          tabBarIcon: (props) => (
+            <AnimatedTabIcon
+              {...props}
+              activeIcon="flash"
+              inactiveIcon="flash-outline"
+            />
           ),
         }}
       />
@@ -60,8 +82,12 @@ export default function TabsLayout() {
         name="profile"
         options={{
           title: 'Perfil',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" size={size} color={color} />
+          tabBarIcon: (props) => (
+            <AnimatedTabIcon
+              {...props}
+              activeIcon="person"
+              inactiveIcon="person-outline"
+            />
           ),
         }}
       />
