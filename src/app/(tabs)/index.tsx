@@ -98,6 +98,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 16,
     borderRadius: 16,
+    // shadow styles
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
     elevation: 2,
   },
   cardSmall: {
@@ -105,6 +109,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 16,
     borderRadius: 16,
+    // shadow styles
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
     elevation: 1,
   },
   cardLabel: {
