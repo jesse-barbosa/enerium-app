@@ -6,9 +6,16 @@ import { AuthProvider, useAuth } from '../contexts/AuthContext';
 function RootNavigator() {
   const { user, loading } = useAuth();
 
+  // Enquanto verifica sessão
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <ActivityIndicator size="large" />
       </View>
     );
@@ -16,13 +23,10 @@ function RootNavigator() {
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      {!user ? (
-        <>
-          <Stack.Screen name="(auth)/login" />
-          <Stack.Screen name="(auth)/register" />
-        </>
-      ) : (
+      {user ? (
         <Stack.Screen name="(tabs)" />
+      ) : (
+        <Stack.Screen name="(auth)" />
       )}
     </Stack>
   );
@@ -31,7 +35,6 @@ function RootNavigator() {
 export default function Layout() {
   return (
     <AuthProvider>
-      {/* ÍCONES PRETOS SOBRE FUNDO BRANCO */}
       <StatusBar style="dark" translucent />
       <RootNavigator />
     </AuthProvider>
