@@ -1,5 +1,8 @@
+import { Ionicons } from '@expo/vector-icons';
+
+import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { supabase } from '../../lib/supabase';
 import { colors } from '../../theme/colors';
 
@@ -24,6 +27,10 @@ export default function Equipments() {
       <FlatList
         data={data}
         keyExtractor={item => item.id}
+        contentContainerStyle={{
+          flexGrow: 1,
+          paddingBottom: 120,
+        }}
         ListEmptyComponent={<EmptyState />}
         renderItem={({ item }) => (
           <View style={styles.card}>
@@ -32,6 +39,13 @@ export default function Equipments() {
           </View>
         )}
       />
+
+      {/* BOTÃO FLUTUANTE */}
+      <Link href="" asChild>
+        <TouchableOpacity style={styles.fab}>
+          <Ionicons name="add" size={28} color="#fff" />
+        </TouchableOpacity>
+      </Link>
     </View>
   );
 }
@@ -53,5 +67,20 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: 'bold'
+  },
+  fab: {
+    position: 'absolute',
+    right: 20,
+    bottom: 30,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 6,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
   },
 });
