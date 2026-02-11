@@ -16,8 +16,8 @@ export function AppHeader ({ title }: Props) {
       </View>
 
     {/* Botão para notificações */}
-    <View>
-      <Ionicons name="notifications-outline" size={30} color={colors.primary} />
+    <View style={styles.notificationsButton}>
+      <Ionicons name="notifications" size={26} color={colors.darkGray} />
     </View>
 
     </Animated.View>
@@ -34,6 +34,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  notificationsButton: {
+    width: 45,
+    height: 45,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: colors.gray
   },
   title: {
     fontSize: 26,
