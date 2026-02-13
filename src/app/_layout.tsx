@@ -1,7 +1,8 @@
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
 
 function RootNavigator() {
@@ -10,15 +11,16 @@ function RootNavigator() {
   // Enquanto verifica sessão
   if (loading) {
     return (
-      <View
+      <SafeAreaView
         style={{
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
+          backgroundColor: '#fff',
         }}
       >
         <ActivityIndicator size="large" />
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -36,10 +38,12 @@ function RootNavigator() {
 export default function Layout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-    <AuthProvider>
-      <StatusBar style="dark" translucent />
-      <RootNavigator />
-    </AuthProvider>
+      <SafeAreaProvider>
+        <AuthProvider>
+          <StatusBar style="dark" translucent />
+          <RootNavigator />
+        </AuthProvider>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }
