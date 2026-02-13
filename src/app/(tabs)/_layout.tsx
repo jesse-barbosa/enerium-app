@@ -1,8 +1,17 @@
-import { Tabs } from 'expo-router';
+import { router, Tabs } from 'expo-router';
 import { AnimatedTabIcon } from '../../components/AnimatedTabIcon';
+import { useAuth } from '../../contexts/AuthContext';
 import { colors } from '../../theme/colors';
 
 export default function TabsLayout() {
+  const { user } = useAuth();
+
+  // se não existe user -> login
+  if (!user) {
+    router.replace('/(auth)/login');
+    return null;
+  }
+
   return (
     <Tabs
       screenOptions={{
