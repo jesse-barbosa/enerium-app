@@ -1,10 +1,12 @@
 import { router, Tabs } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AnimatedTabIcon } from '../../components/AnimatedTabIcon';
 import { useAuth } from '../../contexts/AuthContext';
 import { colors } from '../../theme/colors';
 
 export default function TabsLayout() {
   const { user } = useAuth();
+  const insets = useSafeAreaInsets();
 
   // se não existe user -> login
   if (!user) {
@@ -19,11 +21,13 @@ export default function TabsLayout() {
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: '#999',
         tabBarStyle: {
-          height: 64,
-          paddingBottom: 12,
+          height: 64 + insets.bottom, 
+          // Padding dinâmico para os ícones não ficarem em cima da barra do iOS
+          paddingBottom: insets.bottom > 0 ? insets.bottom : 12,
           paddingTop: 8,
           borderTopWidth: 0,
           elevation: 10,
+          backgroundColor: '#fff',
         },
         tabBarLabelStyle: {
           fontSize: 12,
