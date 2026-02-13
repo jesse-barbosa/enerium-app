@@ -2,23 +2,32 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import {
-    ActivityIndicator,
-    FlatList,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 import { SwipeableEquipmentCard } from '../../components/equipments/SwipeableEquipmentCard';
 import { supabase } from '../../lib/supabase';
 import { colors } from '../../theme/colors';
+import CreateEquipmentModal from '../equipment-create/[environmentId]';
 
 const ENERGY_PRICE = 0.95;
 
 export default function EnvironmentDetails() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
+
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const backdropOpacity = useSharedValue(0);
 
   const [environment, setEnvironment] = useState<any>(null);
   const [equipments, setEquipments] = useState<any[]>([]);
@@ -68,6 +77,23 @@ export default function EnvironmentDetails() {
 
   const totalConsumption = calculateTotalConsumption();
   const totalCost = totalConsumption * ENERGY_PRICE;
+
+  function openModal() {
+    setShowCreateModal(true);
+    backdropOpacity.value = withTiming(1, { duration: 250 });
+  }
+
+  function closeModal() {
+    backdropOpacity.value = withTiming(0, { duration: 200 });
+    setTimeout(() => {
+      setShowCreateModal(false);
+      loadData();
+    }, 200);
+  }
+
+  const backdropStyle = useAnimatedStyle(() => ({
+    opacity: backdropOpacity.value,
+  }));
 
   if (loading) {
     return (
@@ -134,10 +160,35 @@ export default function EnvironmentDetails() {
       {/* FAB */}
       <TouchableOpacity
         style={styles.fab}
-        onPress={() => router.push(`/equipment-create/${id}`)}
+        onPress={openModal}
       >
         <Ionicons name="add" size={26} color="#fff" />
       </TouchableOpacity>
+
+      {showCreateModal && (
+        <>
+          <Animated.View
+            style={[
+              StyleSheet.absoluteFillObject,
+              {
+                backgroundColor: 'rgba(0,0,0,0.4)',
+              },
+              backdropStyle,
+            ]}
+          >
+            <TouchableOpacity
+              style={{ flex: 1 }}
+              activeOpacity={1}
+              onPress={closeModal}
+            />
+          </Animated.View>
+
+          <CreateEquipmentModal
+            environmentId={id as string}
+            onClose={closeModal}
+          />
+        </>
+      )}
     </View>
   );
 }
