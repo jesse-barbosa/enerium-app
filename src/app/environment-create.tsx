@@ -37,14 +37,26 @@ export default function CreateEnvironment() {
       return;
     }
 
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      Alert.alert('Usuário não autenticado');
+      return;
+    }
+
     const { error } = await supabase.from('environments').insert({
       name,
       type,
       area_m2: Number(area),
       energy_tariff: Number(tariff),
+      owner_id: user.id,
     });
 
     if (error) {
+      console.error(error);
+
       Alert.alert('Erro ao salvar ambiente');
       return;
     }
