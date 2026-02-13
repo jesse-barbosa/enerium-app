@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { EmptyState } from '../../components/environments/EmptyState';
-import { EnvironmentCard } from '../../components/environments/EnvironmentCard';
+import { SwipeableEnvironmentCard } from '../../components/environments/SwipeableEnvironmentCard';
 import { AppHeader } from '../../components/layout/AppHeader';
 import { supabase } from '../../lib/supabase';
 import { colors } from '../../theme/colors';
@@ -28,24 +28,41 @@ export default function Environments() {
 
     if (!userId) return;
 
+    try {
     // Meus ambientes
-    const { data: mine } = await supabase
+    const { data: mine, error: mineError } = await supabase
       .from('environments')
       .select('*')
       .eq('owner_id', userId)
       .order('created_at', { ascending: false });
 
+    if (mineError) {
+      console.error("Erro ao carregar ambientes: ", mineError);
+      setLoading(false);
+      return;
+    }
+
     // Compartilhados comigo
-    const { data: shared } = await supabase
+    const { data: shared, error: sharedError } = await supabase
       .from('environment_members')
       .select(`
         environment:environments (*)
       `)
       .eq('user_id', userId);
 
+    if (sharedError) {
+      console.error("Erro ao carregar ambientes: ", sharedError);
+      setLoading(false);
+      return;
+    }
+    
     setMyEnvironments(mine || []);
     setSharedEnvironments(shared?.map((item: any) => item.environment) || []);
     setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
   }
 
   const dataToRender = activeTab === 'mine' ? myEnvironments : sharedEnvironments;
@@ -96,11 +113,14 @@ export default function Environments() {
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={!loading ? <EmptyState /> : null}
         renderItem={({ item }) => (
-          <EnvironmentCard
-            name={item.name}
-            type={item.type}
-            area={item.area_m2}
+          <SwipeableEnvironmentCard
+            item={item}
             onPress={() => router.push(`/environment/${item.id}`)}
+            onEdit={() => router.push(`/environment-edit/${item.id}`)}
+            onDelete={async () => {
+              await supabase.from('environments').delete().eq('id', item.id);
+              loadEnvironments();
+            }}
           />
         )}
       />
