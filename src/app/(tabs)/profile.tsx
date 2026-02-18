@@ -15,6 +15,7 @@ import {
 import { AppHeader } from '../../components/layout/AppHeader';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
+import { colors } from '../../theme/colors';
 
 export default function Profile() {
   const router = useRouter();
@@ -510,23 +511,14 @@ export default function Profile() {
             <Text style={styles.menuItemArrow}>›</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.menuItem, styles.dangerItem]}>
-            <Text style={styles.dangerText}>Desativar Conta Temporariamente</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Botão de Logout */}
-        <View style={styles.logoutButtonContainer}>
           <TouchableOpacity
-            style={styles.logoutButton}
+            style={[styles.menuItem, styles.dangerItem]}
             onPress={handleLogout}
-          >
-            <Text style={styles.logoutButtonText}>Sair da Conta</Text>
+            >
+            <Text style={styles.dangerText}>Sair da Conta</Text>
+            <Ionicons name="exit-outline" size={20} color={"#D32F2F"} />
           </TouchableOpacity>
         </View>
-
-        <View style={{ height: 40 }} />
       </ScrollView>
 
       {/* Modal: Editar Nome */}
@@ -729,7 +721,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5'
   },
   scrollView: {
-    flex: 1
+    flex: 1,
+    marginBottom: 26
   },
   username: {
     fontSize: 24,
@@ -772,7 +765,7 @@ const styles = StyleSheet.create({
     right: 0,
     width: 32,
     height: 32,
-    backgroundColor: '#000',
+    backgroundColor: colors.primary,
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
@@ -787,7 +780,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     paddingHorizontal: 24,
     paddingVertical: 10,
-    backgroundColor: '#000',
+    backgroundColor: colors.primary,
     borderRadius: 20
   },
   editProfileButtonText: {
@@ -859,28 +852,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#D32F2F',
     fontWeight: '500'
-  },
-  logoutButtonContainer: {
-    padding: 16,
-    paddingTop: 8
-  },
-  logoutButton: {
-    backgroundColor: '#fff',
-    borderWidth: 1.5,
-    borderColor: '#000',
-    padding: 16,
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2
-  },
-  logoutButtonText: {
-    color: '#000',
-    textAlign: 'center',
-    fontWeight: '600',
-    fontSize: 16
   },
 
   // Estilos dos Modais
