@@ -1,4 +1,5 @@
 import { router, Tabs } from 'expo-router';
+import { useEffect } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AnimatedTabIcon } from '../../components/AnimatedTabIcon';
 import { useAuth } from '../../contexts/AuthContext';
@@ -9,10 +10,14 @@ export default function TabsLayout() {
   const insets = useSafeAreaInsets();
 
   // se não existe user -> login
-  if (!user) {
-    router.replace('/(auth)/login');
-    return null;
-  }
+  useEffect(() => {
+    if (!user) {
+      router.replace('/(auth)/intro');
+    }
+  }, [user]);
+
+  // evita render enquanto redireciona
+  if (!user) return null;
 
   return (
     <Tabs
