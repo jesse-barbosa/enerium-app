@@ -84,14 +84,14 @@ const styles = StyleSheet.create({
 
   // NOTIFICATION BUTTON (glass / modern)
   notificationWrapper: {
-    borderRadius: 18,
+    borderRadius: 26,
     backgroundColor: '#ffffffcc',
     padding: 2,
   },
   notificationInner: {
     width: 44,
     height: 44,
-    borderRadius: 14,
+    borderRadius: 22,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
