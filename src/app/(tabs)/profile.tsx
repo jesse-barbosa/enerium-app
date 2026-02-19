@@ -913,7 +913,7 @@ const styles = StyleSheet.create({
     borderColor: '#E0E0E0'
   },
   modalButtonConfirm: {
-    backgroundColor: '#000'
+    backgroundColor: colors.primary
   },
   modalButtonDanger: {
     backgroundColor: '#D32F2F'
