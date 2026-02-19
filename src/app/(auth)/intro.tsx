@@ -217,7 +217,7 @@ function IntroContent({ onDone }: { onDone: () => void }) {
         </View>
 
         {index < slides.length - 1 && (
-          <Pressable onPress={onDone}>
+          <Pressable onPress={onDone} style={styles.skipWrapper}>
             <Text style={styles.skip}>Pular</Text>
           </Pressable>
         )}
@@ -349,7 +349,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
-  skip: { fontSize: 14, opacity: 0.5, zIndex: 1 },
+  skipWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    zIndex: 1,
+  },
+  skip: { fontSize: 14, opacity: 0.5},
 
   mediaArea: {
     position: 'absolute',
