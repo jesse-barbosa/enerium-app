@@ -722,7 +722,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    marginBottom: 26
+    marginBottom: 92
   },
   username: {
     fontSize: 24,

@@ -9,34 +9,60 @@ export default function TabsLayout() {
   const { user } = useAuth();
   const insets = useSafeAreaInsets();
 
-  // se não existe user -> login
   useEffect(() => {
-    if (!user) {
-      router.replace('/(auth)/intro');
-    }
+    if (!user) router.replace('/(auth)/intro');
   }, [user]);
 
-  // evita render enquanto redireciona
   if (!user) return null;
 
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
+
+        tabBarShowLabel: true,
+
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: '#999',
+        tabBarInactiveTintColor: '#9aa0a6',
+
         tabBarStyle: {
-          height: 64 + insets.bottom, 
-          // Padding dinâmico para os ícones não ficarem em cima da barra do iOS
-          paddingBottom: insets.bottom > 0 ? insets.bottom : 12,
-          paddingTop: 8,
+          position: 'absolute',
+          left: 16,
+          right: 16,
+          marginHorizontal: 12,
+          bottom: insets.bottom + 10,
+
+          height: 70,
+          paddingBottom: 8,
+          paddingTop: 10,
+
+          borderRadius: 22,
+          backgroundColor: '#ffffffff',
+
           borderTopWidth: 0,
-          elevation: 10,
-          backgroundColor: '#fff',
+
+          // sombra iOS
+          shadowColor: '#000',
+          shadowOpacity: 0.12,
+          shadowRadius: 16,
+          shadowOffset: { width: 0, height: 8 },
+
+          // sombra Android
+          elevation: 14,
         },
+
+        tabBarItemStyle: {
+          borderRadius: 16,
+          marginHorizontal: 4,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+
         tabBarLabelStyle: {
-          fontSize: 12,
-          marginTop: 2,
+          fontSize: 11,
+          fontWeight: '600',
+          marginBottom: 4,
         },
       }}
     >
@@ -45,11 +71,7 @@ export default function TabsLayout() {
         options={{
           title: 'Home',
           tabBarIcon: (props) => (
-            <AnimatedTabIcon
-              {...props}
-              activeIcon="home"
-              inactiveIcon="home-outline"
-            />
+            <AnimatedTabIcon {...props} activeIcon="home" inactiveIcon="home-outline" />
           ),
         }}
       />
@@ -59,11 +81,7 @@ export default function TabsLayout() {
         options={{
           title: 'Ambientes',
           tabBarIcon: (props) => (
-            <AnimatedTabIcon
-              {...props}
-              activeIcon="business"
-              inactiveIcon="business-outline"
-            />
+            <AnimatedTabIcon {...props} activeIcon="business" inactiveIcon="business-outline" />
           ),
         }}
       />
@@ -73,11 +91,7 @@ export default function TabsLayout() {
         options={{
           title: 'Equipamentos',
           tabBarIcon: (props) => (
-            <AnimatedTabIcon
-              {...props}
-              activeIcon="hardware-chip"
-              inactiveIcon="hardware-chip-outline"
-            />
+            <AnimatedTabIcon {...props} activeIcon="hardware-chip" inactiveIcon="hardware-chip-outline" />
           ),
         }}
       />
@@ -87,11 +101,7 @@ export default function TabsLayout() {
         options={{
           title: 'Simular',
           tabBarIcon: (props) => (
-            <AnimatedTabIcon
-              {...props}
-              activeIcon="flash"
-              inactiveIcon="flash-outline"
-            />
+            <AnimatedTabIcon {...props} activeIcon="flash" inactiveIcon="flash-outline" />
           ),
         }}
       />
@@ -101,11 +111,7 @@ export default function TabsLayout() {
         options={{
           title: 'Perfil',
           tabBarIcon: (props) => (
-            <AnimatedTabIcon
-              {...props}
-              activeIcon="person"
-              inactiveIcon="person-outline"
-            />
+            <AnimatedTabIcon {...props} activeIcon="person" inactiveIcon="person-outline" />
           ),
         }}
       />
