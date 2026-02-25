@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../../theme/colors';
 
 interface Props {
@@ -12,37 +13,38 @@ interface Props {
 export function AppHeader({ title, onNotificationsPress }: Props) {
   return (
     <Animated.View entering={FadeInDown.duration(450)} style={styles.wrapper}>
-      <LinearGradient
-        colors={["#ffffff", "#f7f7f8"]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.container}
-      >
-        {/* Title block */}
-        <View style={styles.titleContainer}>
-          <View style={styles.titleAccent} />
-          <Text numberOfLines={1} style={styles.title}>
-            {title}
-          </Text>
-        </View>
-
-        {/* Modern notifications button */}
-        <Pressable
-          onPress={onNotificationsPress}
-          android_ripple={{ color: '#00000010', borderless: true }}
-          style={({ pressed }) => [
-            styles.notificationWrapper,
-            pressed && { transform: [{ scale: 0.96 }], opacity: 0.85 },
-          ]}
+      <SafeAreaView edges={['top']} style={styles.safe}>
+        <LinearGradient
+          colors={['#ffffff', '#f7f7f8']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.container}
         >
-          <View style={styles.notificationInner}>
-            <Ionicons name="notifications-outline" size={22} color="#111" />
-            <View style={styles.dot} />
+          {/* Title block */}
+          <View style={styles.titleContainer}>
+            <View style={styles.titleAccent} />
+            <Text numberOfLines={1} style={styles.title}>
+              {title}
+            </Text>
           </View>
-        </Pressable>
-      </LinearGradient>
 
-      {/* subtle bottom divider */}
+          {/* Modern notifications button */}
+          <Pressable
+            onPress={onNotificationsPress}
+            android_ripple={{ color: '#00000010', borderless: true }}
+            style={({ pressed }) => [
+              styles.notificationWrapper,
+              pressed && { transform: [{ scale: 0.96 }], opacity: 0.85 },
+            ]}
+          >
+            <View style={styles.notificationInner}>
+              <Ionicons name="notifications-outline" size={22} color="#111" />
+              <View style={styles.dot} />
+            </View>
+          </Pressable>
+        </LinearGradient>
+      </SafeAreaView>
+
       <View style={styles.bottomFade} />
     </Animated.View>
   );
@@ -52,17 +54,21 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#fff',
   },
+
+  // SafeArea só cuida do topo; sem padding manual
+  safe: {
+    backgroundColor: '#fff',
+  },
+
   container: {
-    height: 88,
+    height: 76,
     paddingHorizontal: 18,
-    paddingTop: 30,
     paddingBottom: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
 
-  // TITLE
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -82,7 +88,6 @@ const styles = StyleSheet.create({
     color: '#111',
   },
 
-  // NOTIFICATION BUTTON (glass / modern)
   notificationWrapper: {
     borderRadius: 26,
     backgroundColor: '#ffffffcc',
@@ -111,7 +116,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ff3b30',
   },
 
-  // bottom fade divider (premium feel)
   bottomFade: {
     height: 1,
     backgroundColor: '#00000010',
