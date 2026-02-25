@@ -226,7 +226,7 @@ export default function Dashboard() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFFFFF' },
-  content: { paddingHorizontal: 18, paddingTop: 60 },
+  content: { paddingHorizontal: 18, paddingTop: 30 },
 
   // Header
   header: {
