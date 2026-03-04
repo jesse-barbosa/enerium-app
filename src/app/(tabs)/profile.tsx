@@ -256,14 +256,6 @@ export default function Profile() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Data de Nascimento</Text>
-            <View style={styles.menuItemRight}>
-              <Text style={styles.menuItemValue}>Adicionar</Text>
-              <Text style={styles.menuItemArrow}>›</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuItemText}>Endereço</Text>
             <View style={styles.menuItemRight}>
               <Text style={styles.menuItemValue}>Adicionar</Text>
@@ -283,42 +275,6 @@ export default function Profile() {
             <Text style={styles.menuItemText}>Alterar Senha</Text>
             <Text style={styles.menuItemArrow}>›</Text>
           </TouchableOpacity>
-
-          <View style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Autenticação de Dois Fatores</Text>
-            <Switch
-              value={twoFactorEnabled}
-              onValueChange={setTwoFactorEnabled}
-              trackColor={{ false: '#E0E0E0', true: '#4CAF50' }}
-              thumbColor={twoFactorEnabled ? '#fff' : '#f4f3f4'}
-            />
-          </View>
-
-          <View style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Autenticação Biométrica</Text>
-            <Switch
-              value={biometricEnabled}
-              onValueChange={setBiometricEnabled}
-              trackColor={{ false: '#E0E0E0', true: '#4CAF50' }}
-              thumbColor={biometricEnabled ? '#fff' : '#f4f3f4'}
-            />
-          </View>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Dispositivos Conectados</Text>
-            <View style={styles.menuItemRight}>
-              <Text style={styles.menuItemValue}>3 dispositivos</Text>
-              <Text style={styles.menuItemArrow}>›</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Sessões Ativas</Text>
-            <View style={styles.menuItemRight}>
-              <Text style={styles.menuItemValue}>Ver todas</Text>
-              <Text style={styles.menuItemArrow}>›</Text>
-            </View>
-          </TouchableOpacity>
         </View>
 
         {/* Seção: Notificações */}
@@ -326,7 +282,7 @@ export default function Profile() {
           <Text style={styles.sectionTitle}>Notificações</Text>
           
           <View style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Ativar Notificações</Text>
+            <Text style={styles.menuItemText}>Notificações Push</Text>
             <Switch
               value={notificationsEnabled}
               onValueChange={setNotificationsEnabled}
@@ -334,60 +290,11 @@ export default function Profile() {
               thumbColor={notificationsEnabled ? '#fff' : '#f4f3f4'}
             />
           </View>
-
-          <View style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Notificações por E-mail</Text>
-            <Switch
-              value={emailNotifications}
-              onValueChange={setEmailNotifications}
-              trackColor={{ false: '#E0E0E0', true: '#4CAF50' }}
-              thumbColor={emailNotifications ? '#fff' : '#f4f3f4'}
-            />
-          </View>
-
-          <View style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Notificações Push</Text>
-            <Switch
-              value={pushNotifications}
-              onValueChange={setPushNotifications}
-              trackColor={{ false: '#E0E0E0', true: '#4CAF50' }}
-              thumbColor={pushNotifications ? '#fff' : '#f4f3f4'}
-            />
-          </View>
-
-          <View style={styles.menuItem}>
-            <Text style={styles.menuItemText}>E-mails de Marketing</Text>
-            <Switch
-              value={marketingEmails}
-              onValueChange={setMarketingEmails}
-              trackColor={{ false: '#E0E0E0', true: '#4CAF50' }}
-              thumbColor={marketingEmails ? '#fff' : '#f4f3f4'}
-            />
-          </View>
         </View>
 
         {/* Seção: Preferências */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Preferências</Text>
-          
-          <View style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Modo Escuro</Text>
-            <Switch
-              value={darkMode}
-              onValueChange={setDarkMode}
-              trackColor={{ false: '#E0E0E0', true: '#4CAF50' }}
-              thumbColor={darkMode ? '#fff' : '#f4f3f4'}
-            />
-          </View>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Idioma</Text>
-            <View style={styles.menuItemRight}>
-              <Text style={styles.menuItemValue}>Português (BR)</Text>
-              <Text style={styles.menuItemArrow}>›</Text>
-            </View>
-          </TouchableOpacity>
-
           <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuItemText}>Fuso Horário</Text>
             <View style={styles.menuItemRight}>
@@ -405,59 +312,12 @@ export default function Profile() {
           </TouchableOpacity>
         </View>
 
-        {/* Seção: Dados e Armazenamento */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Dados e Armazenamento</Text>
-          
-          <TouchableOpacity 
-            style={styles.menuItem}
-            onPress={handleExportData}
-          >
-            <Text style={styles.menuItemText}>Exportar Meus Dados</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity 
-            style={styles.menuItem}
-            onPress={handleClearCache}
-          >
-            <Text style={styles.menuItemText}>Limpar Cache</Text>
-            <View style={styles.menuItemRight}>
-              <Text style={styles.menuItemValue}>245 MB</Text>
-              <Text style={styles.menuItemArrow}>›</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Uso de Armazenamento</Text>
-            <View style={styles.menuItemRight}>
-              <Text style={styles.menuItemValue}>1.2 GB</Text>
-              <Text style={styles.menuItemArrow}>›</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
         {/* Seção: Ajuda e Suporte */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Ajuda e Suporte</Text>
-          
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Central de Ajuda</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
 
           <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuItemText}>Fale Conosco</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Reportar um Problema</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Sugestões de Melhorias</Text>
             <Text style={styles.menuItemArrow}>›</Text>
           </TouchableOpacity>
 
@@ -488,10 +348,6 @@ export default function Profile() {
             <Text style={styles.menuItemArrow}>›</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Licenças de Código Aberto</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
 
           <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuItemText}>Avaliações e Feedback</Text>
