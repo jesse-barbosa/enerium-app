@@ -87,21 +87,11 @@ export default function TabsLayout() {
       />
 
       <Tabs.Screen
-        name="equipments"
+        name="bills"
         options={{
-          title: 'Equipamentos',
+          title: 'Contas',
           tabBarIcon: (props) => (
-            <AnimatedTabIcon {...props} activeIcon="hardware-chip" inactiveIcon="hardware-chip-outline" />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="simulation"
-        options={{
-          title: 'Simular',
-          tabBarIcon: (props) => (
-            <AnimatedTabIcon {...props} activeIcon="flash" inactiveIcon="flash-outline" />
+            <AnimatedTabIcon {...props} activeIcon="document" inactiveIcon="document-outline" />
           ),
         }}
       />

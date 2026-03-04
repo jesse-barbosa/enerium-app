@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { AppHeader } from '../../components/layout/AppHeader';
 import { calculateEnvironmentSimulation } from '../../lib/simulation';
 import { supabase } from '../../lib/supabase';
 
@@ -25,6 +26,7 @@ export default function Simulation() {
 
   return (
     <View style={styles.container}>
+      <AppHeader title="Dashboard" />
       <TouchableOpacity style={styles.button} onPress={simulate}>
         <Text style={styles.buttonText}>Simular Consumo</Text>
       </TouchableOpacity>
