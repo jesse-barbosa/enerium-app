@@ -106,8 +106,9 @@ function Page({ slide, onNext, isLast }: any) {
           <Image
             source={slide.deviceImage}
             style={{
-              width: width * 0.7,
+              width: '100%',
               height: height * 0.60,
+              resizeMode: 'contain',
             }}
           />
         </View>
